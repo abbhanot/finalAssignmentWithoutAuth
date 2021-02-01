@@ -23,7 +23,7 @@ let Config = {
 }
 
 const signOut =() =>{
-  firebase.default.auth().signOut();
+  //firebase.default.auth().signOut();
 }
 const signIn =() =>{
   const googleAuthProvider = new firebase.default.auth.GoogleAuthProvider();
@@ -41,42 +41,50 @@ function App() {
   //   // console.log(firebase.default.auth())
   // },[])
   return (
-    <FirebaseAuthProvider firebase={firebase.default} {...Config}>
-      <BrowserRouter>
-      <Provider store={store}>
-    <div className="App">
-    
-      <FirebaseAuthConsumer>
-          {({ isSignedIn, user, providerId }) => {
-            return (
-              <>
-              {isSignedIn && (<Layout signOut={signOut}></Layout>)}
-              {!isSignedIn && (<p>Welcome to E-Ride!
-                <button onClick={signIn}>SignIn</button>
-              </p>)}
-              </>
-            );
-          }}
-        </FirebaseAuthConsumer>
-        <div>
-          <IfFirebaseAuthed>
-            {() => {
-              return <div></div>;
-            }}
-          </IfFirebaseAuthed>
-          {/* <IfFirebaseAuthedAnd
-            filter={({ providerId }) => providerId !== "anonymous"}
-          >
-            {({ providerId }) => {
-              return <div>You are authenticated with {providerId}</div>;
-            }}
-          </IfFirebaseAuthedAnd> */}
-        </div>
+    <BrowserRouter>
+       <Provider store={store}>
+     <div className="App">
+     <Layout signOut={signOut}></Layout>
+     </div>
+      </Provider>
+      </BrowserRouter>
 
-    </div>
-    </Provider>
-    </BrowserRouter>
-    </FirebaseAuthProvider>
+    //</Provider> <FirebaseAuthProvider firebase={firebase.default} {...Config}>
+    //   <BrowserRouter>
+    //   <Provider store={store}>
+    // <div className="App">
+    
+    //   <FirebaseAuthConsumer>
+    //       {({ isSignedIn, user, providerId }) => {
+    //         return (
+    //           <>
+    //           {isSignedIn && (<Layout signOut={signOut}></Layout>)}
+    //           {!isSignedIn && (<p>Welcome to E-Ride!
+    //             <button onClick={signIn}>SignIn</button>
+    //           </p>)}
+    //           </>
+    //         );
+    //       }}
+    //     </FirebaseAuthConsumer>
+    //     <div>
+    //       <IfFirebaseAuthed>
+    //         {() => {
+    //           return <div></div>;
+    //         }}
+    //       </IfFirebaseAuthed>
+    //       {/* <IfFirebaseAuthedAnd
+    //         filter={({ providerId }) => providerId !== "anonymous"}
+    //       >
+    //         {({ providerId }) => {
+    //           return <div>You are authenticated with {providerId}</div>;
+    //         }}
+    //       </IfFirebaseAuthedAnd> */}
+    //     </div>
+
+    // </div>
+    // </Provider>
+    // </BrowserRouter>
+    // </FirebaseAuthProvider>
   );
 }
 
